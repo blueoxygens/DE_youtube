@@ -1,34 +1,31 @@
 from airflow import DAG
-import pedulum
-from datetime import datetime, timedelta
+import pendulum
+from datetime import timedelta
 from api.video_stats import get_playlist_id, get_video_ids, extract_video_data, save_to_json
 
 local_tz = pendulum.timezone("Asia/Seoul")
 
-
-from datetime import datetime, timedelta
-
 default_args = {
     # DAG 소유자 (담당자 이름)
     "owner": "khj",
-    
+
     # 이메일 알림 받을 주소
     # "email": ["your_email@example.com"],
-    
+
     # 실패 시 이메일 알림 여부
     # "email_on_failure": False,
-    
+
     # 재시도 시 이메일 알림 여부
     # "email_on_retry": False,
-    
+
     # 실패 시 재시도 횟수
     # "retries": 1,
-    
+
     # 재시도 간격 (5분)
     # "retry_delay": timedelta(minutes=5),
-    
+
     # DAG 시작 날짜 (이 날짜부터 스케줄링 시작)
-    "start_date": datetime(2026, 1, 1),
+    "start_date": pendulum.datetime(2026, 1, 1, tz=local_tz),
     
     # 과거 실행 건 자동 실행 여부
     "catchup": False,
